@@ -1,0 +1,194 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{PDE}
+\author{waluigi120 }
+\date{April 2018}
+
+\begin{document}
+
+\maketitle
+
+\section{First-order Linear Equation}
+
+\subsection{A simplest example}
+$$\frac {\partial u} {\partial x} = 0$$
+$$\Rightarrow <1,0> \cdot <u_x,u_y> = 0$$
+$$\Rightarrow y = c$$
+
+\begin{equation}\label{eq1}
+u(x,y) = f(y)
+\end{equation}
+where f is arbitrary
+
+
+\subsection{The constant coefficient equation}
+
+Definition:
+$$au_x+bu_y=0, a^2+b^2 > 0$$
+
+Solutions:
+
+\subsubsection{Geometric Method}
+
+$$<a,b> \cdot <u_x,u_y> = 0$$
+
+So $<u_x,u_y>$ is orthogonal to $<a,b>$. Since $<u_x,u_y>$ is the gradient of $u$, the function $u$ along the direction $<a,b>$ should be constant.  $bx-ay$ remains constant. It is named as characteristic line.
+
+Similar to $(1)$, $u = f(bx-ay)$
+
+\subsubsection{Coordinate Method}
+
+Change variables 
+
+\begin{equation} 
+ x' = ax+by, y' = bx-ay
+\end{equation}
+
+Then by chain rule,
+$$u_x = \frac{\partial u}{\partial x} = \frac{\partial u}{\partial x'} \frac{\partial x'} {\partial x} + \frac{\partial u}{\partial y'} \frac{\partial y'} {\partial x}  = a u_{x'} + b u_{y'}$$
+
+Similiarily,
+$$u_y = bu_{x'} - a u_{y'}$$
+
+Obviously by the constant coefficient equation,
+$$au_x+bu_y=(a^2+b^2)u_{x'} = 0$$
+
+Therefore, the problem is reduced to 
+$$u_{x'} = 0$$
+
+\subsubsection{Problems}
+1. Solve the PDE $4u_x - 3 u_y = 0$ with condition $u(0,y) = y^3$
+
+Solution:
+
+$<4,-3> \cdot <u_x.u_y> = 0 \rightarrow 3x+4y = c \rightarrow u(x,y) = f(3x+4y)$ 
+
+$u(0,y) = y^3 \rightarrow u(0,y) = f(4y)=y^3,f(u)=(\frac{u}{4})^3$
+
+Overall, $f(3x+4y) = \frac{(3x+4y)^3}{64}$
+
+\subsection{The variable coefficient equation}
+Definition
+
+\begin{equation} \label{eq2}
+u_x+yu_y =0
+\end{equation}
+
+
+It is linear (no $u^2$) and homogeneous (right hand side is zero).
+
+One way to solve it:
+
+Since the gradient's dot product with $<1,y>$ is zero, $<1,y>$ is tangent to the curve. 
+
+$$\frac{dy}{dx} = y \rightarrow y = Ce^x$$
+
+$y = Ce^x$ is called characteristic curve
+
+Similar to the constant coefficient equation, the solution to the problem is $u(x,y) = f(C) = f(ye^{-x})$
+
+\subsubsection{Problems}
+
+1.Solve $u_x+2xy^2u_y=0$
+
+Solution:
+
+$<1,2xy^2> \cdot <u_x,u_y>=0 \rightarrow \frac{dy}{dx} = 2xy^2 \rightarrow \frac{dy}{y^2} = 2x dx \rightarrow -y^{-1} = x^2 + C \rightarrow C = -y^{-1}-x^2$
+
+So $u(x,y) = f(y^{-1}+x^2)$
+
+\subsection{Problems of section 1}
+
+1. Solve $3u_y+u_{xy} = 0$
+
+Solution:
+
+Let $v = u_y$, 
+
+$3v + v_x = 0 \rightarrow \frac{dv}{dx} = -3v \rightarrow v = f(y) e^{-3x}$
+
+$u = g(y)e^{-3x} + h(x)$
+
+2. Solve $\sqrt{1-x^2} u_x + u_y =0$, whose initial condition is $u(0,y) = y$
+
+$\sqrt{1-x^2} u_x + u_y =0 \rightarrow <\sqrt{1-x^2},1> \cdot \nabla u = 0 \rightarrow \frac{dy}{dx} = \frac{1}{\sqrt{1-x^2}}$
+
+$$ \int \frac{1}{\sqrt{1-x^2}} dx$$
+
+Let $x = sin(\theta), dx = cos(\theta) d\theta, 1-x^2 = cos^2(\theta)$
+
+$$ \int \frac{1}{cos(\theta)} cos(\theta) d\theta = \arcsin(x)$$
+
+$\frac{dy}{dx} = \frac{1}{\sqrt{1-x^2}} \rightarrow y = \arcsin(x) + C \rightarrow u(x,y) = f(y-\arcsin(x))$
+
+$u(0,y) = y \rightarrow u(x,y) = y-\arcsin(x)$
+
+3.
+https://math.stackexchange.com/questions/729165/finding-the-uniquely-determined-region-of-a-pde
+
+4.Solve $au_x+bu_y +c u =0$
+
+$au_x/u+bu_y/u +c  =0$
+
+Let $v = \ln(u),$
+
+$av_x+bv_y +c  =0$
+
+Let $x' = ax+by, y' = bx-ay$
+
+$v_x = av_{x'}+bv_{y'}, v_y = bv_{x'} -av_{y'}$
+
+So $av_x+bv_y +c  =0 \rightarrow (a^2+b^2)v_{x'} + c =0 \rightarrow v = \frac{-cx'}{a^2+b^2} + g(bx-ay)$
+
+$u = f(bx-ay) e^{\frac{-c(ax+by)}{a^2+b^2}}$
+
+5. Solve $u_x+u_y+u = e^{x+2y}, u(x,0)=0$
+
+$$\frac{dx}{1} = \frac{dy}{1} = \frac{du}{e^{x+2y}-u}$$
+
+$\frac{dx}{1} = \frac{dy}{1} \rightarrow y=x+C$
+
+$$\frac{du}{e^{x+2y}-u} = \frac{dx}{1}\rightarrow  \frac{du}{dx} = e^{x+2y} -u \rightarrow \frac{du}{dx} + u =  e^{x+2y} \rightarrow e^{x}\frac{du}{dx} + e^{x}u = e^{2x+2y}$$
+$$\rightarrow \frac{e^{x} du}{dx} =   e^{2x+2(x+C)} \rightarrow {e^{x} u} =   \frac{1}{4}e^{2x+2y}+ C_1 = {e^{x} u} =   \frac{1}{4}e^{2x+2y}+ f(y-x) $$
+
+$$ u = \frac{1}{4}e^{x+2y} + \frac{f(y-x)}{e^x}$$
+
+By initial condition
+
+$u(x,0) = \frac{1}{4}e^{x} + \frac{f(-x)}{e^x} = 0 \rightarrow f(x) = -\frac{1}{4}e^{-2x}$
+
+$u = \frac{1}{4}e^{x+2y} - \frac{1}{4}e^{x-2y}$
+
+6. Solve $au_x+bu_y = f(x,y)$
+
+$$\frac{dx}{a} = \frac{dy}{b} = \frac{du}{f(x,y)}$$
+
+$\frac{dx}{a} = \frac{dy}{b} \rightarrow bx = ay+C \rightarrow x = \frac{a}{b} y + C$
+
+$\frac{dy}{b} = \frac{du}{f(x,y)} \rightarrow du  = \frac{f(\frac{a}{b} y + C,y)}{b} dy$
+
+By arc length, $ds = \sqrt{1+(\frac{dx}{dy})^2} dy = \sqrt{1+(a/b)^2} dy$
+
+So $u = \frac{1}{\sqrt{b^2+a^2}} \int f ds+C_1$
+
+7. Solve $u_x+2u_y+(2x-y)u = 2x^2+3xy-2y^2$
+
+Use coordinate method, (Lagrange's method is long and tedious)
+
+$x' = x+2y,y'=2x-y,u_{x} = u_{x'}+2u_{y'},u_{y} = 2u_{x'}-u_{y'}$
+
+$x' = <1,2>, y'=<2,-1>, 2x'-y'=<2,4>-<2,-1>=<0,5> = 5y$
+
+$y = \frac{2}{5} x' - \frac{1}{5} y', x = x' - (\frac{4}{5} x' - \frac{2}{5} y') = \frac{1}{5} x' + \frac{2}{5} y'$
+
+The PDE is converted to 
+
+$u_{x'}+2u_{y'} +(2x-y)u = u_{x'}+2u_{y'}+ 2(2u_{x'}-u_{y'}) + (2(\frac{1}{5} x' + \frac{2}{5} y')-(\frac{2}{5} x' - \frac{1}{5} y'))u = 2(\frac{1}{5} x' + \frac{2}{5} y')^2+3(\frac{1}{5} x' + \frac{2}{5} y')(\frac{2}{5} x' - \frac{1}{5} y')-2(\frac{2}{5} x' - \frac{1}{5} y')^2 $
+
+After simple algebra,
+
+$$ (5u_{x'}+ y'u) = x'y'$$
+
+And then it is reduced to a calculus 4 question
+\end{document}
