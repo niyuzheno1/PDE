@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{hyperref}
 
 \title{PDE}
 \author{waluigi120 }
@@ -191,4 +192,138 @@ After simple algebra,
 $$ (5u_{x'}+ y'u) = x'y'$$
 
 And then it is reduced to a calculus 4 question
+
+\section{Flows, Vibrations, and diffusions}
+
+\subsection{Simple Transport}
+Equation:
+
+$$u_t + cu_x = 0 $$
+
+Solution:
+$$u_t + cu_x = 0 \rightarrow <1,c> \cdot \nabla = 0 \rightarrow u = f(ct-x)$$
+
+If $x$ is fixed, as $t$ increases, $u=f(ct-x) = f(-(x-ct)) = g(x-ct)$
+
+We can set $t=0$, and $t = 1$ to see the tendency of the graph.
+
+When $t =0$, $u = g(x)$, consider the point $(1,g(1))$, it's right now on the position where $x=1$
+
+When $t =1$, $u = g(x-c)$, if $u = g(1)$, then $x = c+1$, so the graph is moving toward right, by the linear transformation of the function parameters.
+
+The velocity is defined by the displacement's difference over the time, which is $c$.
+
+Derivation of the equation:
+
+Assume that mass at position $[0,b]$ dissipating to $[0+ch,b+ch]$ after $\Delta t = h$
+$$M = \int_0^b u(x,t) dx = \int_{ch}^{b+ch} u(x,t+h) dx $$
+
+Differentiating with respect to $b$,
+
+$$ u(b,t)  =  u(b+ch,t+ h) $$
+
+Differentiating with respect to $h$,
+
+$$ 0 = \frac{\partial u}{\partial x}\frac{\partial x}{\partial h} + \frac{\partial u}{\partial t}\frac{\partial t}{\partial h}= cu_x+u_t$$
+
+
+
+\subsection{Vibrating String}
+
+Preparatory:
+
+1) Newton's second law: $F = ma$, or more precisely, $F = mu_{tt}$, u is the displacement
+
+2) The mass of a string is the product of the density and the length.
+
+3) The binomial expansion of square root: $(1+k)^{0.5} = 1^{0.5} \times k^0 + {0.5 \choose 1} k^1 + {0.5 \choose 2} k^2 + {0.5 \choose 3} k^3 + ...  $
+
+As ${a \choose b} = \frac{\Gamma(a+1)}{\Gamma(b+1)\Gamma(b-a+1)}$
+
+${0.5 \choose 1} = \frac{\Gamma(0.5+1)}{\Gamma(1+1)\Gamma(0.5-1+1)} = \frac{1}{2}$
+
+${0.5 \choose 2} = \frac{\Gamma(0.5+1)}{\Gamma(2+1)\Gamma(0.5-2+1)} = \frac{0.5 \cdot (-0.5)}{2} = -0.125$
+....
+
+4) the portion of integration over the interval is the value of the point, as the interval goes smaller:
+
+$$\frac{\int_a^{a+h} f dx}{a+h-a} = f(a), h \rightarrow 0$$
+
+5)the equation for the tension along the longitudinal and traverse lines, respectively (by 1,2, and geometry):
+
+$$\frac{T}{\sqrt{1+u_x^2}}\Big|_{x_0}^{x_1} = 0$$ 
+
+$$\frac{Tu_x}{\sqrt{1+u_x^2}}\Big|_{x_0}^{x_1} = \int_{x_0}^{x_1} \rho u_{tt} dx$$ 
+
+\subsubsection{Derivation of the equation, assume that the $|u_x|$ is pretty small. }
+
+$\sqrt{1+u_x^2} = 1 + \frac{1}{2} u_x^2 - \frac{1}{8}u_x^4 + ...$
+
+Since $|u_x|$ is pretty small, $\sqrt{1+u_x^2} \rightarrow 1$
+
+The equations in $(5)$ becomes,
+
+$T |_{x_0}^{x_1} = T(x_1)-T(x_0) = 0$, implies the tension is constant.
+
+$T u_x |_{x_0}^{x_1} =  \int_{x_0}^{x_1} \rho u_{tt} dx$
+
+it implies,
+
+$\frac{T u_x |_{x_0}^{x_1}}{x_1-x_0} =  \frac{\int_{x_0}^{x_1} \rho u_{tt}dx}{x_1 - x_0}$
+
+As $x_1 \rightarrow x_0$, by (4) in preparatory, $Tu_{xx} =  \rho u_{tt}$
+
+\subsubsection{Three variations of the equation}
+
+As we can see there are three types of  equations: 
+
+
+(1) $u_{tt} - c^2 u_{xx} + r u_t =0,r > 0$, when there is some air resistance. 
+
+
+(2) $u_tt - c^2 u_{xx} + ku = 0, k > 0$, when there is an traverse elastic force proportional to the displacement $u$.
+
+(3) $u_{tt}-c^2u_{xx} = f(x,t)$, if there is an extra force. 
+
+Real life cases of the equations:
+
+elastic bar, the sound waves in a pipe,  water waves in a striaght canal.
+
+Electrical current in a transmission line with equation:
+
+$$u_{xx} = CLu_{tt} + (CR+GL)u_t + GRu$$
+
+C is the capacitance per unit length, G is the leakage resistance per unit, $R$ is the resistence per unition length, L is the self-inductance per unit length.
+
+\subsection{Vibrating Drumhead}
+
+
+$$\int_{\partial D} T \frac{\partial{u}}{\partial n} ds =\int\int_{D} \rho u_{tt} dx dy =ma$$ Why? On the page 14.
+
+$\frac{\partial{u}}{\partial n} = n \cdot \nabla u$
+
+$$\int_{\partial D}  (T\nabla u) \cdot n ds =\int\int_{D} \rho u_{tt} dx dy$$
+
+
+By Green Theorem, which states,
+$$\int_C f \cdot n ds = \int\int_D \nabla \cdot f  dxdy$$
+
+$$\int\int_D \nabla \cdot(T\nabla u) dxdy =\int\int_{D} \rho u_{tt} dx dy$$
+
+$$T \nabla \cdot(\nabla u)= \nabla \cdot(T\nabla u) = \rho u_{tt}$$
+
+By Laplacian(\url{https://en.wikipedia.org/wiki/Laplace_operator}),
+
+$$T(u_{xx}+u_{yy}) = \rho u_{tt}$$
+
+Examples: free mesons in nuclear physics
+
+\subsection{Diffusion}
+
+\subsection{Heat Flow}
+
+\subsection{Stationary Waves and Diffusions}
+
+\subsection{The Hydrogen Atom}
+
 \end{document}
